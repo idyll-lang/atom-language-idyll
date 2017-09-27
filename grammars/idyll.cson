@@ -135,7 +135,7 @@ repository:
 	headers:
 		patterns: [
 			{
-				match: "^#{1,6}\\s*[^#]*"
+				match: "^\#{1,6}\\s*[^#]*"
 				name: "markup.heading.idyll"
 			}
 		]
