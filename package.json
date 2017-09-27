@@ -1,0 +1,17 @@
+{
+  "name": "language-idyll",
+  "version": "0.0.0",
+  "description": "Idyll language support in Atom",
+  "engines": {
+    "atom": "*"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idyll-lang/atom-language-idyll.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idyll-lang/atom-language-idyll/issues"
+  },
+  "license": "MIT"
+}

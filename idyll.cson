@@ -1,0 +1,170 @@
+$schema: "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json"
+fileTypes: ['idl', 'idyll']
+name: "Idyll"
+patterns: [
+	{
+		include: "#components"
+	}
+	{
+		include: "#comments"
+	}
+	{
+		include: "#markdowns"
+	}
+]
+repository:
+	components:
+		patterns: [
+			{
+				include: "#componentopen"
+			}
+			{
+				include: "#componentclose"
+			}
+		]
+	componentopen:
+		name: "component.open.idyll"
+		begin: "(\\[)([a-zA-Z0-9]+)"
+		end: "(/?\\])"
+		beginCaptures:
+			"1":
+				name: "punctuation.definition.tag.begin.idyll"
+			"2":
+				name: "entity.name.tag.idyll"
+		endCaptures:
+			"1":
+				name: "punctuation.definition.tag.end.idyll"
+		patterns: [
+			{
+				include: "#idyllattributes"
+			}
+		]
+	componentclose:
+		patterns: [
+			{
+				name: "component.close.idyll"
+				match: "(\\[\\/)([a-zA-Z0-9]+)(\\])"
+				captures:
+					"1":
+						name: "punctuation.definition.tag.begin.idyll"
+					"2":
+						name: "entity.name.tag.idyll"
+					"3":
+						name: "punctuation.definition.tag.end.idyll"
+			}
+		]
+	idyllattributes:
+		patterns: [
+			{
+				include: "#expressions"
+			}
+			{
+				include: "#strings"
+			}
+			{
+				include: "#numbers"
+			}
+			{
+				include: "#props"
+			}
+		]
+	expressions:
+		begin: "`"
+		end: "`"
+		patterns: [
+			{
+				include: "source.js"
+			}
+		]
+	strings:
+		name: "string.quoted.double.idyll"
+		begin: "\""
+		end: "\""
+		patterns: [
+			{
+				name: "constant.character.escape.idyll"
+				match: "\\\\."
+			}
+		]
+	numbers:
+		patterns: [
+			{
+				name: "constant.numeric.idyll"
+				match: "[0-9]\\.?[0-9]?"
+			}
+		]
+	props:
+		patterns: [
+			{
+				match: " ([^\\:]*)\\:"
+				captures:
+					"1":
+						name: "entity.other.attribute-name"
+			}
+		]
+	comments:
+		patterns: [
+			{
+				name: "comment.line.double-slash.idyll"
+				match: "\\/\\/.*$"
+			}
+			{
+				begin: "/\\*"
+				end: "\\*/"
+				name: "comment.block.idyll"
+			}
+		]
+	markdowns:
+		patterns: [
+			{
+				include: "#headers"
+			}
+			{
+				include: "#bold"
+			}
+			{
+				include: "#italics"
+			}
+			{
+				include: "#unnumberedlists"
+			}
+			{
+				include: "#numberedlists"
+			}
+		]
+	headers:
+		patterns: [
+			{
+				match: "^#{1,6}\\s*[^#]*"
+				name: "markup.heading.idyll"
+			}
+		]
+	bold:
+		patterns: [
+			{
+				match: "(\\*\\*)([^\\s].*[^\\s])(\\*\\*)"
+				name: "markup.bold"
+			}
+		]
+	italics:
+		patterns: [
+			{
+				match: "(\\*)([^\\s\\*].*[^\\s\\*])(\\*)"
+				name: "markup.italic"
+			}
+		]
+	unnumberedlists:
+		patterns: [
+			{
+				match: "^\\s*\\*\\s+"
+				name: "markup.list.unnumbered"
+			}
+		]
+	numberedlists:
+		patterns: [
+			{
+				match: "^\\s*\\d+\\.\\s+"
+				name: "markup.list.numbered"
+			}
+		]
+scopeName: "source.idyll"
